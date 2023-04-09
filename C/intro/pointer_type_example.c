@@ -1,4 +1,6 @@
 #include <stdio.h>
+//#include <wchar.h>
+//#include <locale.h>
 
 //
 // for ascii char codes, see: https://www.gaijin.at/en/infos/ascii-ansi-character-table
@@ -9,22 +11,26 @@
 void
 main() { 
 
+  //setlocale(LC_ALL, "C");
+
   printf("----------------------------------------\n");
 
-  //  char mystr[] = "Þí¾ï"; // using 'multichar chars'
-  char mystr[] = "{|}~"; 
+  //char mystr[] = "Þí¾ï"; // using 'multichar chars'
+  char mystr[] = "{|}~";
+ 
+  printf( "sizeof(char): %d\n", sizeof(char));
   printf( "char string: %s\n", mystr);
-  printf( "size string: %d\n", sizeof(mystr));
+  printf( "sizeof(string): %d\n", sizeof(mystr));
 
-  printf( "individual characters: \n");
+  printf( "individual characters, via index: \n");
   for( int i=0; i<sizeof(mystr)-1; i++ )
     printf("\taddr: %u\tchar:%c \n", &(mystr[i]),mystr[i]);
 
 
   char * strptr = mystr;
-  printf( "from char pointer: \n"); 
+  printf( "individual characters, via pointer: \n"); 
   for( int i=0; i<sizeof(mystr)-1; i++ )
-    printf("\tptr: %u\tchar: %c\n", strptr+i,*(strptr+i));
+    printf("\tptr: %u\tchar: %lc\n", strptr+i,*(strptr+i));
 
   printf("----------------------------------------\n");
   printf( "short size: %d\n", sizeof(short));
