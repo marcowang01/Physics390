@@ -1,8 +1,9 @@
 CPP = g++
 CPPFLAGS = -O2 -g -Iinclude
 
+all : lib test
 
-objs = pdfs.o pdfs2D.o sampling.o
+objs = pdfs.o cdfs.o pdfs2D.o sampling.o
 objs := $(addprefix obj/, $(objs)) 
 
 lib : $(objs)
@@ -19,8 +20,6 @@ obj/%.o : src/%.cc
 
 
 test : bin/test_sample bin/test_exp_inversion bin/test_gaussian_inversion
-all : lib
-
 
 
 clean : 
@@ -29,5 +28,6 @@ clean :
 	rm -f lib/*.a
 	find ./ -name '*~' -exec rm {} \;
 	find ./ -name '#*' -exec rm {} \;
+
 
 

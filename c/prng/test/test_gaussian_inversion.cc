@@ -1,12 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "pdfs.hh"
-#include "sampling.hh"
+#include "prng.hh"
 
 unsigned do_count_reject=1;
 unsigned count_reject=0, count_metro=0;
 
 int main(int argc, char** argv) {
+
+  if( argc != 2 ) {
+    fprintf(stderr,"Error : need a single argument (random seed)\n");
+    return -1;
+  }
 
   srand(strtoul(argv[1],NULL,10));
   
