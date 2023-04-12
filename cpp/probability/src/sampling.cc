@@ -54,8 +54,6 @@ sample_pdf_metropolis( double (*function)(double,double*),
   double g_params[] = {x,1.}; 
   //double x_prime = sample_pdf_rejection(&pdf_gaussian,(double*)&g_params,range_i,range_f);
   double x_prime = sample_pdf_inversion(&inv_cdf_gaussian,(double*)&g_params,range_i,range_f);
-  //  while( x_prime < range_i || x_prime > range_f )
-  //    x_prime = sample_pdf_rejection(&pdf_gaussian,(double*)&g_params,range_i,range_f);
 
   // acceptance ratio
   double alpha = (*function)(x_prime,params)/(*function)(x,params);
