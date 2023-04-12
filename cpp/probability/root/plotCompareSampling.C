@@ -1,11 +1,11 @@
 void
-plotSampling() { 
+plotCompareSampling() { 
 
   TH1F * h_reject = new TH1F("h_reject","h_reject",100,-5,5);
   TH1F * h_metro  = new TH1F("h_metro","h_metro",100,-5,5);
 
   TTree * t = new TTree("t","t"); 
-  t->ReadFile("data/sampling.dat", "index/i:reject/D:metro/D");
+  t->ReadFile("data/compare_sampling.dat", "index/i:reject/D:metro/D");
 
 
 
