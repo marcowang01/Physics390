@@ -16,13 +16,14 @@ int main(int argc, char** argv) {
   
   double params[1] = {0.5};
   double range_i = 0;
-  double range_f = 5;
+  double range_f = 10;
 
-  double x,y;
+  double x,y,x_from_inv;
   for( int i=0; i<500000; i++ ) { 
     x = sample_pdf_rejection( &pdf_exponential, (double*)&params, range_i, range_f);
     y = cdf_exponential(x, (double*)&params);
-    printf( "%d %lf %lf\n", i, x, y);
+    x_from_inv = sample_pdf_inversion( &inv_cdf_exponential, (double*)&params, range_i, range_f);
+    printf( "%d %lf %lf %lf\n", i, x, y, x_from_inv);
   }
 
 
