@@ -19,7 +19,7 @@ obj/%.o : src/%.cc
 	$(CPP) $(CPPFLAGS) -c $^ -o $@
 
 
-test : bin/test_uniform_rejection bin/test_gaussian_rejection bin/test_maxwell_boltzmann_rejection bin/test_maxwell_boltzmann_metropolis  bin/test_exp_inversion bin/test_gaussian_inversion bin/test_compare_sampling 
+test : bin/test_uniform_rejection bin/test_gaussian_rejection bin/test_maxwell_boltzmann_rejection bin/test_maxwell_boltzmann_metropolis  bin/test_exp_inversion bin/test_gaussian_inversion bin/test_compare_sampling bin/test_exp_rejection_with_cdf
 
 
 clean : 
