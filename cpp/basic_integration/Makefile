@@ -29,5 +29,6 @@ clean :
 	find ./ -name '*~' -exec rm {} \;
 	find ./ -name '#*' -exec rm {} \;
 
-
+realclean : clean
+	rm -f bin/*.dat
 
