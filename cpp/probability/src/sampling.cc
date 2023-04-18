@@ -18,7 +18,7 @@ sample_pdf_rejection( double (*function)(double,double*),
   while( 1 ) {  
     x = range_i + rand()*((range_f-range_i)/RAND_MAX);
     y = (double)rand()/RAND_MAX; // [0,1]
-    count_reject++;
+    // count_reject++;
     if( y <= (*function)(x,params) ) break; 
   }
   return x;
@@ -58,7 +58,7 @@ sample_pdf_metropolis( double (*function)(double,double*),
   // acceptance ratio
   double alpha = (*function)(x_prime,params)/(*function)(x,params);
   double y = (double)rand()/RAND_MAX; // [0,1]
-  count_metro++;
+  //count_metro++;
 
   if ( y <= alpha )
     return x_prime;
