@@ -12,7 +12,7 @@ unsigned count_reject=0, count_metro=0;
 
 int main(int argc, char** argv) {
 
-  if( argc != 2 ) {
+  if( argc < 2 ) {
     fprintf(stderr,"Error : need a single argument (random seed)\n");
     return -1;
   }
@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
   double params[1] = {a};
 
   double x_metro = range_i + rand()*((range_f-range_i)/RAND_MAX);;
-  for( int i=0; i<250000; i++ ) { 
+  for( int i=0; i<500000; i++ ) { 
 
     if (test_cdf){
       x_metro  = sample_pdf_metropolis( &cdf_maxwell_boltzmann, (double*)&params, range_i, range_f, x_metro);
