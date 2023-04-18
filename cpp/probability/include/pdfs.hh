@@ -14,5 +14,7 @@ double pdf_student( double x, double* params );
 
 double pdf_gamma( double x, double* params );
 
+double pdf_maxwell_boltzmann( double x, double* params );
+
 
 #endif

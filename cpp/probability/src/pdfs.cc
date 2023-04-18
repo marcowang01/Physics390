@@ -93,5 +93,16 @@ pdf_gamma( double x, double* params )
 }
 
 
-
+// -----------------------------------------------------------------------------
+// maxwell-boltzmann PDF
+// -----------------------------------------------------------------------------
+double
+pdf_maxwell_boltzmann( double x, double* params )
+// -----------------------------------------------------------------------------
+{
+  double a = params[0];
+  double prefactor = sqrt(2 / M_PI) * (1 / (a * a * a));
+  double exponent = -(x * x) / (2 * a * a);
+  return prefactor * x * x * exp(exponent);
+}
 
