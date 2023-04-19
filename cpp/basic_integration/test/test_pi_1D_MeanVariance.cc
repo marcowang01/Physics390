@@ -17,7 +17,7 @@ main(int argc, char** argv )
   double range_f = 1.;
   srand(seed);
 
-  double integral = integrate_1D_MeanVariance(&circular_arc_2D, (double*)&params, range_i, range_f., ntrials );
+  double integral = integrate_1D_MeanVariance(&circular_arc_2D, (double*)&params, range_i, range_f, ntrials );
 
   fprintf( stderr, "Integral: %lf\t4xIntegral: %lf\terror: %lf\tNtrials: %lu\n", 
 	   integral, 4*integral, 4*circular_arc_2D_variance(ntrials,range_i,range_f), ntrials);
