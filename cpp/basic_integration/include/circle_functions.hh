@@ -17,6 +17,8 @@ circular_arc_2D( double x, double* params)
 };
 
 
+
+
 //------------------------------------------------------------------------------
 //
 // specifically for determining Pi from the above via mean/variance
@@ -31,7 +33,7 @@ double
 circular_arc_2D_variance( unsigned long N, double range_i, double range_f )
 //------------------------------------------------------------------------------
 {
-  double V = range_i - range_f;
+  double V = range_f - range_i;
   double var = (2./3) - (M_PI/4)*(M_PI/4);
   return V*sqrt( var/N );
 };
