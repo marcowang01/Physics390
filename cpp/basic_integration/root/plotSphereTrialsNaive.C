@@ -2,7 +2,7 @@
 
 
 void
-plotCircleTrialsNaive() {
+plotSphereTrialsNaive() {
 
 
   gStyle->SetOptStat(0);
@@ -24,7 +24,7 @@ plotCircleTrialsNaive() {
 
     sprintf(mystr, "t%d", sample_sizes[i]);    
     tarr[i] = new TTree(mystr,mystr);
-    sprintf(mystr, "./data/pi_1D_Naive_ntrials_%d_samples_%d.dat", trials, sample_sizes[i]);    
+    sprintf(mystr, "./data/pi_2D_Naive_ntrials_%d_samples_%d.dat", trials, sample_sizes[i]);    
     tarr[i]->ReadFile(mystr, "l0/C:area/F:l1/C:pi/F:l2/C:err/F:l3/C:trials/I");
 
     sprintf(mystr, "pi>>h%d", sample_sizes[i]);
@@ -77,7 +77,6 @@ plotCircleTrialsNaive() {
   c->SetLogy();
   c->Update();
   c->Modified();
-
 
   //
   // now plot error scaling
