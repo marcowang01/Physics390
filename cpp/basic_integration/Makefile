@@ -1,5 +1,6 @@
 CPP = g++
-CPPFLAGS = -O2 -g -Iinclude
+CPPFLAGS = -O2 -g -Iinclude -I../probability/include
+LDFLAGS = -L../probability/lib -Llib  -lprobability -lintegration
 
 all : lib test
 
@@ -10,16 +11,16 @@ lib : $(objs)
 	ar -r lib/libintegration.a $^ 
 
 bin/test_% : test/test_%.cc lib
-	$(CPP) $(CPPFLAGS) $(filter %.o %.cc, $^) -Llib -lintegration -o $@
+	$(CPP) $(CPPFLAGS) $(filter %.o %.cc, $^) $(LDFLAGS) -o $@
 
 bin/% : src/%.cc lib
-	$(CPP) $(CPPFLAGS) $(filter %.o %.cc, $^) -Llib -lintegration -o $@
+	$(CPP) $(CPPFLAGS) $(filter %.o %.cc, $^) $(LDFLAGS) -o $@
 
 obj/%.o : src/%.cc 
 	$(CPP) $(CPPFLAGS) -c $^ -o $@
 
 
-test : bin/test_pi_1D_Naive bin/test_pi_1D_MeanVariance
+test : bin/test_pi_1D_Naive bin/test_pi_1D_MeanVariance bin/test_pi_2D_Naive bin/test_pi_1D_MeanVariance bin/test_importance
 
 
 clean : 
