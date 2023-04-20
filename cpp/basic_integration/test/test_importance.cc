@@ -2,6 +2,7 @@
 // example V from Eric Anderson Stat 578C (Statistical Genetics) lecture notes ...
 //
 
+#include <stdio.h>
 #include <iostream>
 #include <cstddef>
 #include <stdlib.h>
