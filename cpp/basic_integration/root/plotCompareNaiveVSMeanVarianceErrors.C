@@ -84,15 +84,30 @@ plotCompareNaiveVSMeanVarianceErrors() {
   vector<double> n_vals_mv, rms_vals_mv, sem_vals_mv;
   
   for( int i=0; i<N_SAMPLE_SIZES; i++ ) { 
+
+    tarr_circ[i]->Draw("err>>htmp_circ","","goff");
+    TH1F * htmp_circ = (TH1F*)(gDirectory->Get("htmp_circ"));
+    double tmp_err_circ = htmp_circ->GetMean();
+    htmp_circ->Delete();
     n_vals_circ.push_back(tarr_circ[i]->GetMinimum("trials"));
     rms_vals_circ.push_back(harr_circ[i]->GetRMS());
-    sem_vals_circ.push_back(tarr_circ[i]->GetMinimum("err"));
+    sem_vals_circ.push_back(tmp_err_circ);
+
+    tarr_sph[i]->Draw("err>>htmp_sph","","goff");
+    TH1F * htmp_sph = (TH1F*)(gDirectory->Get("htmp_sph"));
+    double tmp_err_sph = htmp_sph->GetMean();
+    htmp_sph->Delete();
     n_vals_sph.push_back(tarr_sph[i]->GetMinimum("trials"));
     rms_vals_sph.push_back(harr_sph[i]->GetRMS());
-    sem_vals_sph.push_back(tarr_sph[i]->GetMinimum("err"));
+    sem_vals_sph.push_back(tmp_err_sph);
+
+    tarr_mv[i]->Draw("err>>htmp_mv","","goff");
+    TH1F * htmp_mv = (TH1F*)(gDirectory->Get("htmp_mv"));
+    double tmp_err_mv = htmp_mv->GetMean();
+    htmp_mv->Delete();
     n_vals_mv.push_back(tarr_mv[i]->GetMinimum("trials"));
     rms_vals_mv.push_back(harr_mv[i]->GetRMS());
-    sem_vals_mv.push_back(tarr_mv[i]->GetMinimum("err"));
+    sem_vals_mv.push_back(tmp_err_mv);
   }
   
   TGraph * g_rms_circ = new TGraph((Int_t) n_vals_circ.size(), (double*)&(n_vals_circ[0]), (double*)&(rms_vals_circ[0]));
