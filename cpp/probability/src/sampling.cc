@@ -56,7 +56,6 @@ sample_pdf_metropolis( double (*function)(double,double*),
   double y, alpha;
   double x_prime = range_i-1; // go through loop at least once ...
   while( x_prime < range_i || x_prime > range_f ) { // don't walk past boundaries
-
     x_prime = sample_pdf_inversion(&inv_cdf_gaussian,(double*)&g_params,range_i,range_f);
 
     // acceptance ratio
