@@ -31,12 +31,17 @@ vegas_integral_1D(unsigned trial, unsigned Nevt, unsigned Niter, unsigned Ng,
 // -----------------------------------------------------------------------------
 {
 
+  vector<int> n1vec(Ng);
+  vector<double> d1vec(Ng);
+
   bool map_done;
   if( do_importance_remap ) map_done=false; else map_done=true; 
 
-  vector<int> n1vec(Ng);
-  vector<double> d1vec(Ng);
-  VegasResults results(Niter);
+  VegasResults results; 
+#ifdef FIXED_ITERATIONS
+  results.iterations.resize(Niter);
+#endif
+
   for( int it=0; it<Niter; it++ ) 
     {   
 	  
@@ -88,8 +93,11 @@ vegas_integral_1D(unsigned trial, unsigned Nevt, unsigned Niter, unsigned Ng,
       // an estimate of the population estimate ... over sqrt(N)
       double I_var_mean = I_var/(Nevt-1);
       
+#ifdef FIXED_ITERATIONS      
       results.iterations[it] = VegasIterResults {I_mean,I_var,I_var_mean};
-
+#else 
+      results.iterations.push_back(VegasIterResults {I_mean,I_var,I_var_mean});
+#endif
 
       //
       // running weighted avg ... 

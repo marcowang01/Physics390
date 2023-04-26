@@ -15,6 +15,19 @@ typedef struct {
   double mean, var, var_mean;
 } VegasIterResults;
 
+typedef struct  { 
+public: 
+
+  bool converged;
+  unsigned Nev_total;
+  double chisq;
+  vector<VegasIterResults> iterations;
+  double wI, wIerr; // weighted results
+  //
+  int niter;
+} VegasResults;
+
+/*
 class VegasResults  { 
 public: 
 
@@ -41,10 +54,8 @@ public:
   }
 
   ~VegasResults() {iterations.clear();};
-
-
-
 } ;
+*/
 
 #endif
 
