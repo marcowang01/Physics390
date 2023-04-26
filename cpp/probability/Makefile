@@ -1,5 +1,5 @@
 CPP = g++
-CPPFLAGS = -O2 -g -Iinclude
+CPPFLAGS = -O2 -g -Iinclude 
 
 all : lib test
 
@@ -19,8 +19,7 @@ obj/%.o : src/%.cc
 	$(CPP) $(CPPFLAGS) -c $^ -o $@
 
 
-test : bin/test_uniform_rejection bin/test_gaussian_rejection bin/test_exp_inversion bin/test_gaussian_inversion bin/test_compare_sampling bin/test_exp_rejection_with_cdf bin/test_double_gaussian_sampling
-#bin/test_maxwell_boltzmann_rejection bin/test_maxwell_boltzmann_metropolis
+test : bin/test_uniform_rejection bin/test_gaussian_rejection bin/test_exp_inversion bin/test_gaussian_inversion bin/test_compare_sampling bin/test_exp_rejection_with_cdf bin/test_double_gaussian_sampling bin/test_maxwell_boltzmann_rejection bin/test_maxwell_boltzmann_metropolis
 
 clean : 
 	rm -f bin/*
