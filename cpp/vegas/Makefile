@@ -3,7 +3,7 @@
 WHICH_VEGAS_LIB = vegas_kh # vegas
 
 CPP = g++
-CPPFLAGS = -O2 -g -DFIXED_ITERATIONS  -I../probability/include -Iinclude
+CPPFLAGS = -O2 -g -std=c++0x -DFIXED_ITERATIONS  -I../probability/include -Iinclude
 LDFLAGS = -L./lib -l$(WHICH_VEGAS_LIB) -L../probability/lib -lprobability 
 
 #GSL_CPPFLAGS = -I../basic_integration/include
