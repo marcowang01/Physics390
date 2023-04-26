@@ -55,7 +55,8 @@ for e in ${Nevts[*]}; do
 	root -l -q ./root/vegas1d/plotIsample.C\($e,$s,\"$ipath\",\"$opath\"\)
     done
 
-    root -l -q -e "gInterpreter->AddIncludePath(\"$PWD/include\")" ./root/vegas1d/plotBounds.C\($Niter,$e,\"$ipath\",\"$opath\"\)
+    # need to fix on quest
+    #root -l -q -e "gInterpreter->AddIncludePath(\"$PWD/include\")" ./root/vegas1d/plotBounds.C\($Niter,$e,\"$ipath\",\"$opath\"\)
 
     (( i++ ));
 done;
