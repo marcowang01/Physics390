@@ -93,5 +93,18 @@ pdf_gamma( double x, double* params )
 }
 
 
-
+// -----------------------------------------------------------------------------
+// maxwell-boltzmann PDF
+// -----------------------------------------------------------------------------
+double 
+pdf_maxwell_boltzmann( double x, double* params ) 
+// -----------------------------------------------------------------------------
+{ 
+  if( x<=0 ) return 0.;
+  double a      = params[0];
+  double exparg = -x*x/(2.*a*a);
+  double frac   = x*x*exp(exparg)/pow(a,3.);
+  double val    = sqrt(2./M_PI)*frac;
+  return val;
+}
 
