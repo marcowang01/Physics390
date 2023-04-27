@@ -21,8 +21,11 @@ objs := $(addprefix obj/, $(objs))
 lib : $(objs)
 	ar -r lib/libintegration.a $^ 
 
+deplib : 
+	$(MAKE) -C ../probability lib
 
-bin/test_% : test/test_%.cc lib
+
+bin/test_% : test/test_%.cc lib deplib
 	$(CPP) $(CPPFLAGS) $(filter %.o %.cc, $^) $(LDFLAGS) -o $@
 
 bin/% : src/%.cc lib
@@ -44,6 +47,7 @@ clean :
 	rm -f lib/*.a
 	find ./ -name '*~' -exec rm {} \;
 	find ./ -name '#*' -exec rm {} \;
+	$(MAKE)  -C ../probability clean
 
 realclean : clean
 	rm -f bin/*.dat

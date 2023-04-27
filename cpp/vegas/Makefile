@@ -35,12 +35,16 @@ libKH : lib
 	cp lib/libvegas.a lib/libvegas_kh.a
 	rm ./obj/*.o
 
+deplib : 
+	$(MAKE) -C ../probability lib
+
+
 #bin/%_clinkage : tests/%_clinkage.cc lib
 #	$(CPP) $(CPPFLAGS_C) $(filter %.o %.cc, $^) $(LDFLAGS_C) -o $@
 #bin/gsl% : tests/gsl%.cc lib
 #	$(CPP) $(CPPFLAGS) $(GSL_CPPFLAGS) $(filter %.o %.cc, $^) $(GSL_LDFLAGS) $(LDFLAGS) -o $@
 
-bin/% : tests/%.cc lib
+bin/% : tests/%.cc lib deplib
 	$(CPP) $(CPPFLAGS) $(filter %.o %.cc, $^) $(LDFLAGS) -o $@
 
 bin : $(test) #$(gsl) $(ctest)
@@ -54,6 +58,7 @@ clean :
 	touch bin/.keepme
 	touch obj/.keepme
 	touch lib/.keepme
+	$(MAKE)  -C ../probability clean
 
 realclean : clean
 	rm -rf data/vegas*
