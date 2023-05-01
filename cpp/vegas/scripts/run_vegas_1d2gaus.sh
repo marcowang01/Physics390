@@ -12,8 +12,8 @@ opath=./png/vegas_1d_ng_${Ng}
 mkdir -p $ipath
 mkdir -p $opath
 
-Nevts=( 10000 );
-#Nevts=( 10000 25000 50000 75000 100000 250000 500000 750000 1000000);
+#Nevts=( 10000 );
+Nevts=( 10000 25000 50000 75000 100000 250000 500000 750000 1000000);
 
 
 if [ -e ${ipath}/sample_stderr.dat ]; then
@@ -30,9 +30,9 @@ for e in ${Nevts[*]}; do
     ofile=${ipath}/Itrials__Ntrials_${Ntrials}_Niter_${Niter}_Nevts_${e}.dat
     
     echo "./bin/vegas_integrate_1d2gaus --debug  --path $ipath --seed $RANDOM --trials $Ntrials --iterations $Niter --events $e --importance $Ng   > ${ofile}"
-    ./bin/vegas_integrate_1d2gaus --debug  --path $ipath --seed $RANDOM --trials $Ntrials --iterations $Niter --events $e --importance $Ng   > ${ofile}
+    time ./bin/vegas_integrate_1d2gaus --debug  --path $ipath --seed $RANDOM --trials $Ntrials --iterations $Niter --events $e --importance $Ng   > ${ofile}
 
-    str=`root -l -q ./root/vegas1d/plotIntegral.C\($Ntrials,$Niter,$e,\"$ipath\",\"$opath\"\) | grep rms`
+    str=`root -l -q -b ./root/vegas1d/plotIntegral.C\($Ntrials,$Niter,$e,\"$ipath\",\"$opath\"\) | grep rms`
     echo "str --> $str"
 
     enew=`echo $str | awk '{print $2}'`
@@ -47,19 +47,25 @@ for e in ${Nevts[*]}; do
     echo "$e $enew ${avg_uni} ${avg_vegas} ${rms_uni} ${rms_vegas} ${var_uni} ${var_vegas} ${varavg_uni} ${varavg_vegas}" >> ${ipath}/sample_stderr.dat
     echo "stat --> e: $e enew: $enew avgU: ${avg_uni} avgV: ${avg_vegas} rmsU: ${rms_uni} rmsV: ${rms_vegas} varU: ${var_uni} varV: ${var_vegas} varavgU: ${varavg_uni} varavgV: ${varavg_vegas}"
 
+    # plot the weighted results from all iterations
+    root -l -q -b  root/vegas1d/plotWeightedIntegral.C\($Ntrials,$Niter,$e,\"$ipath\",\"$opath\"\) | tail -1 >> ${ipath}/weighted_sample_stderr.dat
 
-    #root -l -q -b  root/vegas1d/plotWeightedIntegral.C\($Ntrials,$Niter,$e,\"$ipath\",\"$opath\"\) | tail -1 >> ${ipath}/weighted_sample_stderr.dat
 
-
+    # plot all integral samples from the first 10 trials
     for s in $(seq 0 9); do 
-	root -l -q ./root/vegas1d/plotIsample.C\($e,$s,\"$ipath\",\"$opath\"\)
+	root -l -q -b ./root/vegas1d/plotIsample.C\($e,$s,\"$ipath\",\"$opath\"\)
     done
 
-    # need to fix on quest
-    #root -l -q -e "gInterpreter->AddIncludePath(\"$PWD/include\")" ./root/vegas1d/plotBounds.C\($Niter,$e,\"$ipath\",\"$opath\"\)
+    # plot the x bin boundaries for all iterations
+    root -l -q -b -e "gInterpreter->AddIncludePath(\"$PWD/include\")" ./root/vegas1d/plotBounds.C\($Niter,$e,\"$ipath\",\"$opath\"\)
+
+    # plot the optimization target for the first/last iterations
+    root -l -q -b ./root/vegas1d/plotOptTarget.C\($Niter,$e,\"$ipath\",\"$opath\"\)
 
     (( i++ ));
 done;
 
-#root -l -q ./root/vegas1d/plotStdErrSummary.C\(\"$ipath\",\"$opath\"\)
-#root -l -q ./root/vegas1d/plotWeightedStdErrSummary.C\(\"$ipath\",\"$opath\"\)
+# compare errors from the first and last iterations
+root -l -q -b ./root/vegas1d/plotStdErrSummary.C\(\"$ipath\",\"$opath\"\)
+# compare errors
+root -l -q -b ./root/vegas1d/plotWeightedStdErrSummary.C\(\"$ipath\",\"$opath\"\)

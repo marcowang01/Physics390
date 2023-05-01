@@ -1,5 +1,5 @@
 #include <vector>
-#include "vegas_constants.hh"
+#include "include/vegas_constants.hh"
 
 void plotBounds(Int_t Ntest, Int_t Nevt, const char* ipath, const char* opath) { 
 
@@ -8,6 +8,7 @@ void plotBounds(Int_t Ntest, Int_t Nevt, const char* ipath, const char* opath) {
   char fname[512];
   sprintf(fname,"%s/xbounds__Niter_%d_Nevt_%d.dat", ipath,Ntest,Nevt);
   t->ReadFile(fname, "test/I:index/I:lbound1/F:width1/F");
+  t->Print();
   TCanvas * c = new TCanvas("c","c",0,0,600,500);
 
   //
@@ -21,7 +22,8 @@ void plotBounds(Int_t Ntest, Int_t Nevt, const char* ipath, const char* opath) {
   gsum->SetParameter(3,0.5);
   gsum->SetParameter(4,1.5);
   gsum->SetParameter(5,0.3);
- 
+  gsum->Print();
+
   for( int i=0; i<t->GetMaximum("test"); i++ ) {  
   
     (TH1F*)(c->DrawFrame(-VEGAS_HIGH_RANGE,0.,VEGAS_HIGH_RANGE,1.));
@@ -31,10 +33,14 @@ void plotBounds(Int_t Ntest, Int_t Nevt, const char* ipath, const char* opath) {
 
     int n1 = t->Draw("lbound1",drawstr,"goff");
     std::vector<TLine*> lvec1;
-    for( int i=0; i<n1; i++ ) {
-      double lbound = *(t->GetV1()+i);
-      lvec1.push_back(new TLine(lbound,0.,lbound,1.));
-      lvec1.back()->Draw("s");
+    for( int j=0; j<n1; j++ ) {
+      double lbound = *(t->GetV1()+j);
+
+      // problems on quest with old root, 
+      // not saving the pointer helps?
+      (new TLine(lbound,0.,lbound,1.))->Draw("s");
+      //      lvec1.push_back(new TLine(lbound,0.,lbound,1.));
+      //lvec1[i]->Draw("s");
     }
 
 
@@ -47,6 +53,8 @@ void plotBounds(Int_t Ntest, Int_t Nevt, const char* ipath, const char* opath) {
     c->Print(drawstr);
 
   }
+
+  return;
 
 }
 
