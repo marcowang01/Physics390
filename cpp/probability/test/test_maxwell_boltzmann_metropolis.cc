@@ -4,7 +4,6 @@
 
 unsigned count_reject=0, count_metro=0;
 
-
 //----------------------------------------------
 // usage: ./test_maxwell_boltzmann_metropolis [random seed] [a] [test_cdf]
 // example: ./test_maxwell_boltzmann_metropolis $RANDOM 1.0 1 > maxwell_boltzmann.dat
@@ -30,7 +29,7 @@ int main(int argc, char** argv) {
   }
   
   double range_i = 0.;
-  double range_f =  20.;
+  double range_f =  18.;
   double params[1] = {a};
 
   double x_metro = range_i + rand()*((range_f-range_i)/RAND_MAX);;
