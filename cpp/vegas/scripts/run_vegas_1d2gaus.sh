@@ -52,15 +52,16 @@ for e in ${Nevts[*]}; do
 
 
     # plot all integral samples from the first 10 trials
-    for s in $(seq 0 9); do 
-	root -l -q -b ./root/vegas1d/plotIsample.C\($e,$s,\"$ipath\",\"$opath\"\)
-    done
+    # must be run w/o -b (batch) for stats boxes ... 
+    #for s in $(seq 0 9); do 
+	#root -l -q  ./root/vegas1d/plotIsample.C\($e,$s,\"$ipath\",\"$opath\"\)
+    #done
 
     # plot the x bin boundaries for all iterations
-    root -l -q -b -e "gInterpreter->AddIncludePath(\"$PWD/include\")" ./root/vegas1d/plotBounds.C\($Niter,$e,\"$ipath\",\"$opath\"\)
+    root -l -q -b -e "gInterpreter->AddIncludePath(\"$PWD\")" ./root/vegas1d/plotBounds.C\($Niter,$e,\"$ipath\",\"$opath\"\)
 
     # plot the optimization target for the first/last iterations
-    root -l -q -b ./root/vegas1d/plotOptTarget.C\($Niter,$e,\"$ipath\",\"$opath\"\)
+    root -l -q -b  -e "gInterpreter->AddIncludePath(\"$PWD\")" ./root/vegas1d/plotOptTarget.C\($Niter,$e,\"$ipath\",\"$opath\"\)
 
     (( i++ ));
 done;
