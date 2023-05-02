@@ -20,4 +20,22 @@ double integrate_1D_Naive( double (*function)(double, double*),
 double binomial_error( unsigned long N, unsigned long k );
 
 
+typedef struct { 
+  double x;
+  double y;
+	double z;
+} Points3D;
+
+unsigned naive_trial_2D( double (*function)(double, double, double*), 
+			 double* params, 
+			 double range_i, double range_f,  
+			 Points3D* opt_points = NULL );
+
+double integrate_2D_Naive( double (*function)(double, double, double*), 
+			   double* params, 
+			   double range_i, double range_f, 
+			   unsigned long ntrials, 
+			   Points3D* opt_points = NULL );
+
+
 #endif

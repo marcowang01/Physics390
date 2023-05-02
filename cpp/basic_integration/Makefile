@@ -35,8 +35,8 @@ obj/%.o : src/%.cc
 	$(CPP) $(CPPFLAGS) -c $^ -o $@
 
 
-test : bin/test_pi_1D_Naive bin/test_pi_1D_MeanVariance  bin/test_pi_1D_MeanVariance bin/test_importance 
-#bin/test_pi_2D_Naive bin/test_maxwell_boltzmann_MeanVariance
+test : bin/test_pi_1D_Naive bin/test_pi_1D_MeanVariance  bin/test_pi_1D_MeanVariance bin/test_importance bin/test_pi_2D_Naive 
+# bin/test_maxwell_boltzmann_MeanVariance
 
 
 
