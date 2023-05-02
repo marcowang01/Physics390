@@ -6,7 +6,7 @@
 $ cd cpp/probability
 $ make
 ```
-## Maxwell-Boltzmann Metropolis
+## Maxwell-Boltzmann Metropolis Sampling
 ### Sample PDF with a=5
 ```bash
 $ ./bin/test_maxwell_boltzmann_metropolis $RANDOM 5 > maxwell_boltzmann.dat
@@ -17,7 +17,7 @@ $ root -l root/plotMaxwellBoltzmann.C
 $ ./bin/test_maxwell_boltzmann_metropolis $RANDOM 5 1 > maxwell_boltzmann.dat
 $ root -l root/plotMaxwellBoltzmann.C
 ```
-## Maxwell-Boltzmann Metropolis
+## Maxwell-Boltzmann Rejection Sampling
 ### Sample PDF with a=5
 ```bash
 $ ./bin/test_maxwell_boltzmann_rejection $RANDOM 5 > maxwell_boltzmann.dat
