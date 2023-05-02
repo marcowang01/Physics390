@@ -38,7 +38,7 @@ int plotDoubleGaussianSampleStats(unsigned Nsamples, unsigned Nevts) {
   TH1F * hstd = (TH1F*)(gROOT->FindObjectAny("hstd"));
 
   cout << "mean of means : " << hmean->GetMean()  << endl;
-  cout << "rms of means, mean of vars  : " << hmean->GetStdDev()  << " , " << hvar->GetMean() << endl;
+  cout << "rms of means, mean of vars  : " << hmean->GetRMS()  << " , " << hvar->GetMean() << endl;
   cout << "mean of sqrt(var/N) : " << hstd->GetMean()  << endl;
 
   char pngname[512];

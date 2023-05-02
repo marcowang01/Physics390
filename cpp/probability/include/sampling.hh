@@ -5,7 +5,7 @@
 
 
 // tmp : global call counts
-extern unsigned count_reject, count_metro;
+//extern unsigned count_reject, count_metro;
 
 double sample_pdf_rejection( double (*function)(double,double*), 
 			     double* params,

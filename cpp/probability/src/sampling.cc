@@ -18,7 +18,7 @@ sample_pdf_rejection( double (*function)(double,double*),
   while( 1 ) {  
     x = range_i + rand()*((range_f-range_i)/RAND_MAX);
     y = (double)rand()/RAND_MAX; // [0,1]
-    count_reject++;
+    // count_reject++;
     if( y <= (*function)(x,params) ) break; 
   }
   return x;
@@ -52,13 +52,16 @@ sample_pdf_metropolis( double (*function)(double,double*),
 
   // gaussian proposal density
   double g_params[] = {x,1.}; 
-  //double x_prime = sample_pdf_rejection(&pdf_gaussian,(double*)&g_params,range_i,range_f);
-  double x_prime = sample_pdf_inversion(&inv_cdf_gaussian,(double*)&g_params,range_i,range_f);
 
-  // acceptance ratio
-  double alpha = (*function)(x_prime,params)/(*function)(x,params);
-  double y = (double)rand()/RAND_MAX; // [0,1]
-  count_metro++;
+  double y, alpha;
+  double x_prime = range_i-1; // go through loop at least once ...
+  while( x_prime < range_i || x_prime > range_f ) { // don't walk past boundaries
+    x_prime = sample_pdf_inversion(&inv_cdf_gaussian,(double*)&g_params,range_i,range_f);
+
+    // acceptance ratio
+    alpha = (*function)(x_prime,params)/(*function)(x,params);
+    y = (double)rand()/RAND_MAX; // [0,1]
+  }
 
   if ( y <= alpha )
     return x_prime;

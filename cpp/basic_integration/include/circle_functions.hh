@@ -5,7 +5,7 @@
 
 //------------------------------------------------------------------------------
 //
-// The area under which is pi/4
+// The area under which is piR^2/4
 //
 //------------------------------------------------------------------------------
 double 
@@ -15,6 +15,9 @@ circular_arc_2D( double x, double* params)
   double R = params[0];
   return sqrt( R*R - x*x);
 };
+
+
+
 
 //------------------------------------------------------------------------------
 //
@@ -27,11 +30,26 @@ circular_arc_2D( double x, double* params)
 //
 //------------------------------------------------------------------------------
 double 
-variance( unsigned long N )
+circular_arc_2D_variance( unsigned long N, double range_i, double range_f )
 //------------------------------------------------------------------------------
 {
+  double V = range_f - range_i;
   double var = (2./3) - (M_PI/4)*(M_PI/4);
-  return sqrt( var/N );
+  return V*sqrt( var/N );
+};
+
+
+//------------------------------------------------------------------------------
+//
+// The volume under which is (1/8)*(4/3)piR^3 = (1/6)piR^3
+//
+//------------------------------------------------------------------------------
+double 
+sphereical_shell_3D( double x, double y, double* params) 
+//------------------------------------------------------------------------------
+{
+  double R = params[0];
+  return sqrt( R*R - x*x - y*y);
 };
 
 

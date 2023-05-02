@@ -78,4 +78,52 @@ plotCircleTrialsNaive() {
   c->Update();
   c->Modified();
 
+
+  //
+  // now plot error scaling
+  //
+
+  vector<double> n_vals, rms_vals, sem_vals;
+  for( int i=0; i<N_SAMPLE_SIZES; i++ ) { 
+    n_vals.push_back(tarr[i]->GetMinimum("trials"));
+    rms_vals.push_back(harr[i]->GetRMS());
+    sem_vals.push_back(tarr[i]->GetMinimum("err"));
+  }
+  
+  TGraph * g_rms = new TGraph((Int_t) n_vals.size(), (double*)&(n_vals[0]), (double*)&(rms_vals[0]));
+  TGraph * g_sem = new TGraph((Int_t) n_vals.size(), (double*)&(n_vals[0]), (double*)&(sem_vals[0]));
+  TCanvas * cc = new TCanvas("cc","cc",6-0,0,600,500);
+  TH1F* fframe = (TH1F*)(cc->DrawFrame(0.1,
+				       0.1*TMath::MinElement(g_rms->GetN(),g_rms->GetY()),
+				       1.5*TMath::MaxElement(g_rms->GetN(),g_rms->GetX()),
+				       1.5*TMath::MaxElement(g_rms->GetN(),g_rms->GetY())));
+
+  cout << "minY: " << 0.1*TMath::MinElement(g_rms->GetN(),g_rms->GetY()) << endl;
+  cout << "maxX: " << 1.5*TMath::MaxElement(g_rms->GetN(),g_rms->GetX()) << endl;
+  cout << "maxY: " << 1.5*TMath::MaxElement(g_rms->GetN(),g_rms->GetY()) << endl;
+
+
+
+  TLegend * leg = new TLegend(0.7,0.6,0.9,0.9);
+  leg->SetTextSize(0.05);
+
+  g_rms->SetMarkerColor(kBlue);
+  g_rms->SetMarkerStyle(20);
+  g_rms->SetMarkerSize(1.2);
+  g_rms->Print();
+  leg->AddEntry(g_rms,"#sigma_{means}","p");
+  
+
+  g_sem->SetLineColor(kRed);
+  g_sem->SetLineWidth(2);
+  g_sem->Print();
+  leg->AddEntry(g_sem,"#frac{#sigma_{sample}}{#sqrt{N}}","l");
+
+  cc->SetLogy();
+  cc->SetLogx();
+  g_sem->Draw("l");
+  g_rms->Draw("p");
+  leg->Draw("same");
+
+
 }

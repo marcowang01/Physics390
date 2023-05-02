@@ -54,10 +54,16 @@ plotCircleTrialsMeanVariance() {
 
   for( int i=0; i<N_SAMPLE_SIZES; i++ ) { 
 
+
+    tarr[i]->Draw("err>>htmp","","goff");
+    TH1F* htmp = (TH1F*)(gDirectory->Get("htmp"));
+    double tmperr = htmp->GetMean();
+    htmp->Delete();
+
     cout << "samples: " << sample_sizes[i] << "\t"
 	 << "mean: " << harr[i]->GetMean() << "\t"
 	 << "rms: " << harr[i]->GetRMS() << "\t" 
-	 << "err: " << tarr[i]->GetMinimum("err") << "\t"
+	 << "err: " << tmperr << "\t"
 	 << "trials: " << harr[i]->GetEntries()  << "\t"
 	 << endl;
 
