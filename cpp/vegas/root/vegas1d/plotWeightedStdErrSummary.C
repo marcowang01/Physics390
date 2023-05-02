@@ -22,17 +22,19 @@ int plotWeightedStdErrSummary(const char* ipath, const char* opath) {
   g1->SetMarkerColor(kRed);
   g1->SetMarkerStyle(21);
   g1->SetMarkerSize(1.2);
-    g1->Draw("p");
+  g1->Draw("p");
 
   t->SetLineColor(kBlue);
   t->SetLineWidth(2);
-  //t->Draw("wIerr:Nevts*20","","lsame");
+  t->Draw("wIerr:Nevts*20","","lsame");
 
 
   TF1 *flinear_sm = new TF1("flinear_sm", "[0]*TMath::Power(x,[1])", 10000, 20*1000000);
   flinear_sm->SetParameter(0,0.6);
   flinear_sm->SetParameter(1,-0.5);
   flinear_sm->SetLineColor(kMagenta);
+  flinear_sm->SetLineStyle(7);
+  flinear_sm->SetLineWidth(2);
   g1->Fit("flinear_sm", "","", 20*10000, 20*1000000);
 
   
