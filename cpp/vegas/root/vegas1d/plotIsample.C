@@ -26,8 +26,8 @@ void plotIsample(Int_t Nevt, Int_t trial, const char* ipath, const char* opath) 
   TTree * t = new TTree("t","t");
   t->ReadFile(fname, "Ifirst/F:Ilast/F");
 
-  TH1F * h_first = new TH1F( "h_first", "h_first", 250, 0,5);
-  TH1F * h_last  = new TH1F( "h_last", "h_last", 250, 0,5);
+  TH1F * h_first = new TH1F( "h_first", "h_first", 250, 0,15);
+  TH1F * h_last  = new TH1F( "h_last", "h_last", 250, 0,15);
 
 
   t->Draw("Ifirst>>h_first","","goff");
@@ -43,14 +43,14 @@ void plotIsample(Int_t Nevt, Int_t trial, const char* ipath, const char* opath) 
   h_last->SetLineWidth(2);
 
   h_first->Draw("hsames");
-  c1->Modified();c1->Update();
+  c1->Modified();c1->Update();c1->Modified();
   TPaveStats * stats1u = (TPaveStats*)(c1->GetPrimitive("stats"));
   stats1u->SetName("stats1u");
   stats1u->SetY1NDC(0.9);
   stats1u->SetY2NDC(0.7);
 
   h_last->Draw("hsames");
-  c1->Modified();c1->Update();
+  c1->Modified();c1->Update();c1->Modified();
   TPaveStats * stats1v = (TPaveStats*)(c1->GetPrimitive("stats"));
   stats1v->SetName("stats1v");
   stats1v->SetY1NDC(0.7);

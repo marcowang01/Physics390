@@ -34,10 +34,10 @@ int plotStdErrSummary(const char* ipath, const char* opath) {
 
 
 
-  t->SetLineColor(kViolet);
-  t->SetLineWidth(2);
-  t->Draw("(rmsU/sqrt(2)):Nevts_new","","lsame");
-
+  //t->SetLineColor(kViolet);
+  //t->SetLineWidth(2);
+  //t->Draw("(rmsU/sqrt(2)):Nevts_new","","lsame");
+  
 
   c->SetLogy();
   sprintf(fname, "%s/stderr_scaling.png",opath);

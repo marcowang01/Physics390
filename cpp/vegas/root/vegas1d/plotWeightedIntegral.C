@@ -15,7 +15,7 @@ void plotWeightedIntegral(Int_t Ntrials, Int_t Ntests, Int_t Nevts, const char* 
   t->ReadFile(fname, "trial/I:Nevts_new/F:Iavg_u/F:Ivar_u/F:Ivarmean_u/F:Iavg_v/F:Ivar_v/F:Ivarmean_v/F:ndof/I:chisq/F:chisq_ndof/F:wI/F:wIerr/F"); 
 
   //char  cutstr[256] = "ndof<20";
-  char  cutstr[256] = "TMath::Abs(chisq_ndof-1.)<.5";
+  char  cutstr[256] = "TMath::Abs(chisq_ndof-1.)<2.";
 
   TH1F * h_vw_avg = new TH1F( "h_vw_avg", "h_vw_avg", 200, 0.99,1.01);
   TH1F * h_vw_err = new TH1F( "h_vw_err", "h_vw_err", 200, 0.,0.003);

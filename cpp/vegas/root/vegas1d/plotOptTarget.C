@@ -45,6 +45,7 @@ void plotOptTarget(Int_t Niter, Int_t Nevt, const char* ipath, const char* opath
   g_occ_first->Print();
   g_occ_last->Print();
 
+  char pngstr[512];
 
   TCanvas * c1 = new TCanvas("c1","c1",0,0,600,500);
   double max_occ = 1.1*TMath::Max(TMath::MaxElement(n,g_occ_first->GetY()),TMath::MaxElement(n,g_occ_last->GetY()));
@@ -63,7 +64,6 @@ void plotOptTarget(Int_t Niter, Int_t Nevt, const char* ipath, const char* opath
   g_occ_last->SetMarkerSize(1.2);
   g_occ_first->Draw("pl");
   g_occ_last->Draw("pl");
-  char pngstr[512];
   sprintf(pngstr,"%s/xOccupany_Nevts_%d.png", opath,Nevt);
   c1->Print(pngstr);
 
@@ -85,7 +85,6 @@ void plotOptTarget(Int_t Niter, Int_t Nevt, const char* ipath, const char* opath
   g_avgJF_last->SetMarkerSize(1.2);
   g_avgJF_first->Draw("pl");
   g_avgJF_last->Draw("pl");
-  char pngstr[512];
   sprintf(pngstr,"%s/xavgJF_Nevts_%d.png", opath,Nevt);
   c2->Print(pngstr);
 
@@ -107,7 +106,6 @@ void plotOptTarget(Int_t Niter, Int_t Nevt, const char* ipath, const char* opath
   g_avgJ2F2_last->SetMarkerSize(1.2);
   g_avgJ2F2_first->Draw("pl");
   g_avgJ2F2_last->Draw("pl");
-  char pngstr[512];
   sprintf(pngstr,"%s/xavgJ2F2_Nevts_%d.png", opath,Nevt);
   c3->Print(pngstr);
 

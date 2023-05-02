@@ -43,7 +43,8 @@ void plotIntegral(Int_t Ntrials, Int_t Ntests, Int_t Nevts, const char* ipath, c
 
   //char  cutstr[256] = "ndof<20";
   // for fixed iterations
-  char  cutstr[256] = "fabs(chisq_ndof -1.)<0.5";
+  //  char  cutstr[256] = "fabs(chisq_ndof -1.)<0.5";
+  char  cutstr[256] = "fabs(chisq_ndof -1.)<2.";
   
   TH1F * h_u_avg = new TH1F( "h_u_avg", "h_u_avg", 200, 0.8,1.2);
   TH1F * h_v_avg = new TH1F( "h_v_avg", "h_v_avg", 200, 0.8,1.2);
@@ -85,6 +86,8 @@ void plotIntegral(Int_t Ntrials, Int_t Ntests, Int_t Nevts, const char* ipath, c
   h_v_avg->SetLineColor(kBlue);
   h_v_avg->SetLineWidth(2);
 
+  // needs to be interactive for moving stats
+  /* 
   h_u_avg->Draw("hsames");
   c1->Modified();c1->Update();
   TPaveStats * stats1u = (TPaveStats*)(c1->GetPrimitive("stats"));
@@ -98,7 +101,7 @@ void plotIntegral(Int_t Ntrials, Int_t Ntests, Int_t Nevts, const char* ipath, c
   stats1v->SetName("stats1v");
   stats1v->SetY1NDC(0.7);
   stats1v->SetY2NDC(0.5);  
-
+  */
   c1->SetLogy();
   sprintf(pngstr,"%s/Iavg_Ntrials_%d_Ntests_%d_Nevts_%d.png",
 	  opath,Ntrials,Ntests,Nevts);
@@ -121,6 +124,8 @@ void plotIntegral(Int_t Ntrials, Int_t Ntests, Int_t Nevts, const char* ipath, c
   h_v_std->SetLineColor(kBlue);
   h_v_std->SetLineWidth(2);
 
+  // needs to be interactive for moving stats
+  /*
   h_u_std->Draw("hsames");
   c2->Modified();c2->Update();
   TPaveStats * stats2u = (TPaveStats*)(c2->GetPrimitive("stats"));
@@ -134,6 +139,7 @@ void plotIntegral(Int_t Ntrials, Int_t Ntests, Int_t Nevts, const char* ipath, c
   stats2v->SetName("stats2v");
   stats2v->SetY1NDC(0.7);
   stats2v->SetY2NDC(0.5);  
+  */
 
   sprintf(pngstr,"%s/Istderr_Ntrials_%d_Ntests_%d_Nevts_%d.png",
 	  opath, Ntrials,Ntests,Nevts);
@@ -156,6 +162,8 @@ void plotIntegral(Int_t Ntrials, Int_t Ntests, Int_t Nevts, const char* ipath, c
   h_v_var->SetLineColor(kBlue);
   h_v_var->SetLineWidth(2);
 
+  // needs to be interactive for moving stats
+  /*
   h_u_var->Draw("hsames");
   c2b->Modified();c2b->Update();
   TPaveStats * stats2ub = (TPaveStats*)(c2b->GetPrimitive("stats"));
@@ -169,7 +177,7 @@ void plotIntegral(Int_t Ntrials, Int_t Ntests, Int_t Nevts, const char* ipath, c
   stats2vb->SetName("stats2vb");
   stats2vb->SetY1NDC(0.7);
   stats2vb->SetY2NDC(0.5);  
-
+  */
   sprintf(pngstr,"%s/Ivar_Ntrials_%d_Ntests_%d_Nevts_%d.png",
 	  opath,Ntrials,Ntests,Nevts);
   //c2b->SetLogx();
