@@ -47,6 +47,8 @@ integrate_1D_Naive( double (*function)(double, double*),
 //------------------------------------------------------------------------------
 {
 
+  double dim = (range_f-range_i);
+  double V = dim*dim;
   unsigned long ninside=0;
   for( int i=0; i<ntrials; i++ ) {
 
@@ -60,9 +62,77 @@ integrate_1D_Naive( double (*function)(double, double*),
     }
     ninside += inside;
   } // trials
-
-  return (double)ninside/ntrials;
+  return V*(double)ninside/ntrials;
 }
+
+
+//------------------------------------------------------------------------------
+//
+// A single x,y trial from a sample with many trials.  Optionally return the 
+// x & y coordinates 
+//
+//------------------------------------------------------------------------------
+unsigned
+naive_trial_2D( double (*function)(double, double, double*), 
+                double* params, 
+                double range_i, double range_f, 
+                Points3D* opt_points )
+//------------------------------------------------------------------------------
+{
+  double dim = (range_f-range_i);
+  double x = dim*rand()/RAND_MAX;
+  double y = dim*rand()/RAND_MAX;
+  double z = dim*rand()/RAND_MAX;
+
+  if( opt_points != NULL ) { 
+    opt_points->x = x;
+    opt_points->y = y;
+    opt_points->z = z;
+  }
+
+  if( z <= function( x, y, params ) )
+    return 1;
+  return 0;
+
+}
+
+
+
+//------------------------------------------------------------------------------
+//
+// Integrate by looping over many trials
+//
+//------------------------------------------------------------------------------
+double
+integrate_2D_Naive( double (*function)(double, double, double*), 
+                    double* params, 
+                    double range_i, double range_f, 
+                    unsigned long ntrials, 
+                    Points3D* opt_points )
+//------------------------------------------------------------------------------
+{
+
+  double dim = (range_f-range_i);
+  double V = dim*dim*dim;
+  unsigned long ninside=0;
+  for( int i=0; i<ntrials; i++ ) {
+
+    unsigned inside=0;
+
+    if( opt_points != NULL ) { 
+      inside = naive_trial_2D( function, params, range_i, range_f, opt_points );
+      printf( "i: %d x: %lf y: %lf z: %lf\n", inside, opt_points->x, opt_points->y, opt_points->z);
+    } else { 
+      inside = naive_trial_2D( function, params, range_i, range_f );
+    }
+    ninside += inside;
+  } // trials
+
+  return V*(double)ninside/ntrials;
+}
+
+
+
 
 //------------------------------------------------------------------------------
 //

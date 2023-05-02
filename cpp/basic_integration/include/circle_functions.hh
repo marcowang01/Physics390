@@ -39,4 +39,18 @@ circular_arc_2D_variance( unsigned long N, double range_i, double range_f )
 };
 
 
+//------------------------------------------------------------------------------
+//
+// The volume under which is (1/8)*(4/3)piR^3 = (1/6)piR^3
+//
+//------------------------------------------------------------------------------
+double 
+sphereical_shell_3D( double x, double y, double* params) 
+//------------------------------------------------------------------------------
+{
+  double R = params[0];
+  return sqrt( R*R - x*x - y*y);
+};
+
+
 #endif
