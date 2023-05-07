@@ -14,7 +14,7 @@ end counter8b;
 
 architecture Behavioral of counter8b is
 
-  signal clk_div : STD_LOGIC_VECTOR (27 downto 0) := (others => '0');
+  signal clk_div : STD_LOGIC_VECTOR (28 downto 0) := (others => '0');
   signal counter : STD_LOGIC_VECTOR (7 downto 0) := X"00";
 
 begin
@@ -30,10 +30,10 @@ begin
 
   
   -- up/down counter, 200 MHz -> 0.75 Hz
-  process (clk_div(27), DIR)
+  process (clk_div(28), DIR)
   begin
     -- counting up
-    if ( rising_edge(clk_div(27)) ) then
+    if ( rising_edge(clk_div(28)) ) then
       if (DIR = '1') then
         counter <= counter + '1';
       -- counting down
