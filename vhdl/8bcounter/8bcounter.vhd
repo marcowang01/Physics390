@@ -30,10 +30,10 @@ begin
 
   
   -- up/down counter, 200 MHz -> 0.75 Hz
-  process (clk_div(26), DIR)
+  process (clk_div(27), DIR)
   begin
     -- counting up
-    if ( rising_edge(clk_div(26)) ) then
+    if ( rising_edge(clk_div(27)) ) then
       if (DIR = '1') then
         counter <= counter + '1';
       -- counting down
