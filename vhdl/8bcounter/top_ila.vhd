@@ -38,7 +38,7 @@ begin
 
   
   
-  counter : entity work.up_dn_counter
+  counter : entity work.counter8b
   port map(
     CLK => sysclk,
     DIR => direction,
@@ -61,9 +61,9 @@ begin
   myila : entity work.ila_0
     port map(
       clk        => sysclk,
-      probe_0    => leds,
-      probe_1(0) => direction
-      )
+      probe0(0)  => direction,
+      probe1     => leds
+      );
   
 
 end Behavioral;
