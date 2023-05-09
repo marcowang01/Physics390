@@ -28,6 +28,7 @@ begin
     end if;
   end process;
 
+  
   -- up/down counter
   -- 28 bits : 200 MHz -> 0.75 Hz but leading is
   -- effectively /2, so use bit 27 

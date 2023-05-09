@@ -36,8 +36,6 @@ begin
     IB => sysclk_n,
     O  => sysclk
     );
-
-  
   
   counter : entity work.counter8b
   port map(
