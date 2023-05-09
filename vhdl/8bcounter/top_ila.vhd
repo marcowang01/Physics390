@@ -26,6 +26,7 @@ architecture Behavioral of top is
   signal sysclk : STD_LOGIC;
   signal direction : STD_LOGIC;
   signal leds : STD_LOGIC_VECTOR (7 downto 0) := (others => '0');
+  signal count_div : STD_LOGIC_VECTOR(27 downto 0) := (others => '0');
 
 begin
 
@@ -40,9 +41,10 @@ begin
   
   counter : entity work.counter8b
   port map(
-    CLK => sysclk,
-    DIR => direction,
-    COUNT => leds
+    CLK       => sysclk,
+    DIR       => direction,
+    COUNT     => leds,
+    COUNT_INT => count_div    
     );
 
 
@@ -62,7 +64,8 @@ begin
     port map(
       clk        => sysclk,
       probe0(0)  => direction,
-      probe1     => leds
+      probe1     => leds,
+      probe2     => count_div
       );
   
 
