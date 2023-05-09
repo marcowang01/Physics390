@@ -47,7 +47,6 @@ begin
     COUNT_INT => count_div    
     );
 
-
   gpio_led_7_ls <= leds(7);
   gpio_led_6_ls <= leds(6);
   gpio_led_5_ls <= leds(5);
@@ -58,7 +57,6 @@ begin
   gpio_led_0_ls <= leds(0);  
 
   direction <= gpio_dip_sw1;
-
   
   myila : entity work.ila_0
     port map(
