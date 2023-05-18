@@ -146,4 +146,53 @@ update_map( vector<VegasBin> &xvec, vector<double> &dvec, int Ng )
   xvec = xvecp;
 }
 
+// 
+// normalize the dvec
+//
+void
+normalize_d( vector<double> &dvec, vector<int> &nvec )
+{
+  if(dvec.size() != nvec.size()){
+    cout << "Error: vectors are of unequal length." << endl;
+    return;
+  }
+  // iterate over the vector and normalize
+  for(size_t i = 0; i < dvec.size(); i++) {
+      if(nvec[i] != 0) { // avoid division by zero
+          dvec[i] /= nvec[i]; // divide by the corresponding element in nvec
+      }
+      else {
+          dvec[i] = 0.0; // if the nvec element is 0, assign 0.0 to the corresponding element in dvec
+      }
+  }
+}
+
+//
+// smooth the dvec
+//
+void
+smooth( vector<double> &dvec)
+{
+  vector<double> copy = dvec;
+  dvec[0] = (7 * copy[0] + copy[1]) / 8.;
+  for (int i = 1; i < dvec.size() - 1; i++) {
+    dvec[i] = (copy[i-1] + 6 * copy[i] + copy[i+1]) / 8.;
+  }
+  dvec[dvec.size()-1] = (copy[dvec.size()-2] + 7 * copy[dvec.size()-1]) / 8.;
+}
+
+//
+// compress the dvec with parameter alpha
+//
+void
+compress( vector<double> &dvec, double alpha)
+{
+  for (int i = 0; i < dvec.size(); i++) {
+    if (dvec[i] == 0) {
+        cout << "Error: Division by zero encountered. The input vector must not contain zeros." << endl;
+        return;
+    }
+    dvec[i] = pow((1-dvec[i])/(log(1/dvec[i])), alpha);
+  }
+}
 
